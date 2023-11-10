@@ -14,37 +14,36 @@ const Loginform = () => {
     Name : "",
     password :""
   })
-  const userNameHandle = (event)=>{
+
+  const handleInputValue = (event,fieldName) =>{
     setUserValue({
-      Name : event.target.value,
-      password : userValue.password
+      ...userValue,
+      [fieldName] : event.target.value
     })
   }
-  const userPasswordHandle = (event)=>{
-    setUserValue({
-      Name : userValue.Name,
-      password : event.target.value
-    })
-  }
+
 
   return (
     <div className='from-container' >
       <form action="" onSubmit={handleFrom} >
         <div>
           <label htmlFor="username">UserName : </label>
-          <input onChange={userNameHandle} type="text" name="" id="username" />
+          <input onChange={(event)=>handleInputValue(event,"Name")} 
+          type="text" name="" id="username" />
         </div>
         <div>
+
           <label htmlFor="password">Password : </label>
           <input className="password" 
           type= {togglePass? "password" : "text" } 
-          onChange={userPasswordHandle}
+          onChange={(event)=>handleInputValue(event,"password")} 
           name="" id="password"/>
           <button className="pssvisibility" onClick={passwordVisibility} >
             {
               togglePass ? <FaToggleOn/> : <FaTimes/>
             }
           </button>
+
         </div>
         <div className="btn" >
           <button  type='submit' >Login</button>
